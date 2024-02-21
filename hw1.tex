@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{amsmath}
+\usepackage{float}
+\setmainlanguage{hebrew}
+\setmainfont{Times New Roman}
+% \newfontfamily{\hebrewfont}{New Peninim MT}
+\renewcommand*{\thesection}{}
+\renewcommand*{\thesubsection}{\alph{subsection}.}
+\renewcommand*{\thesubsubsection}{\arabic{subsubsection}.}
+\title{תרגיל בית 1}
+\date{}
+\begin{document}
+\maketitle
+\newpage
+\section{שאלה 1}
+\subsection*{2}
+נגדיר את מרחב החיפוש 
+$(S, O, I, G)$.
+\begin{itemize}
+\item[$S$:]
+קבוצת המצבים במרחב מייצגים את מיקום הסוכן ואילו כדורי דרקון נאספו. לכן כל מצב מוגדר ע"י מספר התא בו נמצא הסוכן והאם כדור 1 או 2 נאספו.
+$$S = ([63]\cup\{0\}) \times \{0,1\} \times \{0, 1\}$$
+\item[$O$:]
+$$O = \{Down, Up, Left, Right\}$$
+\item[$I$:]
+$$I = \{(0, False, False)\}$$
+\item[$G$:]
+$$G = \{(63, True, True)\}$$
+\end{itemize}
+גודל מרחב המצבים הוא
+$$64 \times 2 \times 2 = 256$$
+
+\subsection*{3}
+ניתן להפעיל Up בכל מצב חוץ מבחור, לכן הפונקציה Domain על אופרטור Up מוגדרת:
+$$Domain(Up) = \{s \in S| board(s[0]) \neq H\}$$
+כאשר board הוא לוח המשחק שמיוצג ע"י מחרוזת באורך 64.
+
+\subsection*{4}
+מהמצב ההתחלתי ניתן או לנסות לנוע למעלה או שמאלה ואז להישאר במקום, או לנוע ימינה למצב 1, או לנוע למטה למצב 8. לכן
+$$Succ(0) = \{0, 1, 8\}$$
+
+\subsection*{5}
+במרחב החיפוש שלנו אכן קיימים מעגלים. לדוגמה ניתן ממצב 0 לנוע ימינה למצב 1, ואז לנוע שמאלה למצב 0 ולסגור מעגל.
+\subsection*{6}
+מקדם הסיעוף בבעיה הוא 4 כיוון שממצב מסוים ניתן לנוע לכל היותר לארבעה מצבים שונים (ויש מצב בו ניתן לנוע לארבעה מצבים שונים, למשל מצב 9).
+\subsection*{7}
+במקרה הגרוע ביותר, סוכן כללי לא יגיע למצב הסופי. למשל יכול להיות סוכן שנתקע במעגל לנצח.
+\subsection*{8}
+במקרה הטוב ביותר, ידרשו לסוכן 16 פעולות. מסלול שמגיע למצב הסופי צריך לאסוף את שני כדורי הדרקון ואז להגיע ל-G. לכן מסלול מינימלי הוא מסלול מינימלי מ-S לכדור דרקון כלשהו ואז מסלול מינימלי מכדור הדרקון לכדור הדרקון האחר, ולבסוף מסלול מינימלי מכדור הדרקון ל-G. ראינו בהרצאה ש-BFS מחזיר מסלול קצר ביותר. לכן נריץ שני מסלולים עם BFS והקצר מבניהם יהיה המסלול הקצר ביותר אל המצב הסופי:
+\begin{enumerate}
+\item $S \rightarrow dragonBall1 \rightarrow dragonBall2 \rightarrow G$
+\item $S \rightarrow dragonBall2 \rightarrow dragonBall1 \rightarrow G$
+\end{enumerate}
+לאחר ההרצה קיבלנו שהמסלול הקצר הוא באורך של 16 פעולות.
+
+\subsection*{9}
+\end{document}
